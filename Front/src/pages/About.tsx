@@ -34,7 +34,7 @@ function AboutPage() {
         </div>
       </div>
       <div className="flex justify-center items-center flex-col mt-32">
-        <h1 className="font-poppins font-semibold text-[50px]">
+        <h1 className="font-poppins font-semibold text-[64px]">
           Pourquoi{" "}
           <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             StudyBuddy
