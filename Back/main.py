@@ -1,6 +1,10 @@
 from fastapi import FastAPI
+from config.database import engine,Base
 
-app = FastAPI()
+app = FastAPI(title='backia')
+
+#Database creation 
+Base.metadata.create_all(bind=engine)
 
 
 @app.get("/")
