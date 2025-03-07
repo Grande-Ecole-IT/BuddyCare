@@ -7,6 +7,17 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: "hsla(265, 90%, 59%, 1)",
+        primaryTransparent: "#8738F5",
+        secondary: "#C8B3FF",
+        accent: "#4112FD",
+        primaryDark: "#590AC7",
+        secondaryDark: "#16004D",
+        accentDark: "#3102ED",
+        backgroundDark: "#00001A",
+        textDark: "#F0DCFF",
+      },
       screens: {
         xs: { max: "640px" }, // Ajoute xs comme taille d'écran personnalisée
       },
