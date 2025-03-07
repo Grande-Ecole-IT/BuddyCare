@@ -9,8 +9,8 @@ from models.Category import Category
 CategoryRouter = APIRouter()
 
 @CategoryRouter.post("/Categorys/",response_model=CreateCategory)
-async def create_Category(Category: CreateCategory, db: Session = Depends(get_db)):
-    return create_category(db,Category)
+async def create_Category(cat: CreateCategory, db: Session = Depends(get_db)):
+    return create_category(db,cat)
 
 @CategoryRouter.get("/Category/{id}",response_model=CreateCategory)
 def read_user(id:int,db:Session=Depends(get_db)):
