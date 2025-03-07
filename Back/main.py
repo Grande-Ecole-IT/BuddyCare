@@ -1,12 +1,17 @@
 from fastapi import FastAPI
-from config.database import engine,Base
+from config.database import engine,Base,init_db
+from routes.messages import messageRouter
+from contextlib import asynccontextmanager
 
-app = FastAPI(title='backia')
+@asynccontextmanager
+async def appLifeSpan(app:FastAPI):
+    await init_db()
+    yield
+    
 
-#Database creation 
-Base.metadata.create_all(bind=engine)
+app = FastAPI(title='backia',lifespan=appLifeSpan)
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+
+
+app.include_router(messageRouter,tags=["Message router"])

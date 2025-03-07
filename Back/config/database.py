@@ -22,7 +22,19 @@ engine = create_engine(DATABASE_URL)
 sessionLocal = sessionmaker(autocommit=False,autoflush=False,bind=engine)
 
 # Database class
+
+
 Base = declarative_base()
+
+async def init_db():
+    import models.User
+    import models.Category
+    import models.Message
+    import models.Profile
+    import models.Question
+    Base.metadata.create_all(engine)
+    
+    
 
 def get_db():
     db = sessionLocal()
@@ -30,4 +42,3 @@ def get_db():
         yield db
     finally:
         db.close()
-

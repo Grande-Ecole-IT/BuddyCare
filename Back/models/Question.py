@@ -8,6 +8,7 @@ class Question(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     question = Column(String(255), nullable=False)
     response = Column(String(255), nullable=False)
-    category = relationship('Category')
-    category_id = Column(Integer,ForeignKey('categorys.id'))
+    category_id = Column(Integer,ForeignKey('Category.id'))
+    category = relationship('Category',back_populates="question")
+    
     

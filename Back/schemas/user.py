@@ -16,4 +16,3 @@ class UserCreate(BaseModel):
     birthday : date
     study : str
     sex : str
-    
