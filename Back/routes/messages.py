@@ -4,9 +4,14 @@ from fastapi import Depends
 from config.database import get_db
 from utils.createMessages import create_messages
 from schemas.message import CreateMessage
+from models.Message import Message
 
 messageRouter = APIRouter()
 
 @messageRouter.post("/messages/",response_model=CreateMessage)
-async def create_message(message: CreateMessage, db: Session = Depends(get_db)):
+async def create_Message(message: CreateMessage, db: Session = Depends(get_db)):
     return create_messages(db,message)
+
+@messageRouter.get("/message/{id}",response_model=CreateMessage)
+def read_user(id:int,db:Session=Depends(get_db)):
+    return db.query(Message).filter(Message.id==id).first()
