@@ -2,8 +2,9 @@ import Header from "@/components/Common/Header";
 
 const Question1 = () => {
     return (
-        <div className="relative border-2 border-red-500">
-            <div className="absolute fullscreen-bg">
+        <div className="relative border-2">
+            <Header userName={""} />
+            <div className="absolute fullscreen-bg-1">
                 <svg width="1156" height="1024" viewBox="0 0 1156 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M585 164.5C642 50.5 524.833 -0.5 473.5 -3.5L40 -22V1057L922 1097.5C1153.2 973.9 1069 843 998 793C914 728.5 654.392 785.666 782 551.5C879 373.5 767.5 295.556 667.5 302.5C523.5 312.5 559 216.5 585 164.5Z" fill="url(#paint0_linear_104_248)" />
                     <path d="M667 164.5C724 50.5 606.833 -0.5 555.5 -3.5L122 -22V1057L1004 1097.5C1235.2 973.9 1151 843 1080 793C996 728.5 736.392 785.666 864 551.5C961 373.5 849.5 295.556 749.5 302.5C605.5 312.5 641 216.5 667 164.5Z" fill="url(#paint1_linear_104_248)" />
@@ -21,7 +22,7 @@ const Question1 = () => {
                 </svg>
 
             </div>
-            <div className="container flex justify-center border-2 border-red-800 items-center ml-36 mt-12">
+            <div className="container flex justify-center items-center ml-36 mt-12">
                 <div className="q1-responses">
                     <div className="q1-resp">🥱 Moins de 6 heures</div>
                     <div className="q1-resp">😊 Entre 6 et 8 heures</div>
