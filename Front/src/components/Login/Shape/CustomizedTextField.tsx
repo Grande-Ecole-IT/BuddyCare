@@ -1,16 +1,23 @@
-import { IconButton, InputAdornment, TextField } from "@mui/material";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 type TextFieldProps = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: UseFormRegister<any>;
   errors: FieldErrors;
   name: string;
   placeholder: string;
-  isMdp: boolean
+  isMdp: boolean;
 };
-function CustomizeTextField({register, errors, name, placeholder, isMdp}: TextFieldProps) {
+function CustomizeTextField({
+  register,
+  errors,
+  name,
+  placeholder,
+  isMdp,
+}: TextFieldProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
