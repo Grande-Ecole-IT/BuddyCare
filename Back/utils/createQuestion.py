@@ -5,7 +5,8 @@ from schemas.question import CreateQuestion
 def create_question(db:Session,question:CreateQuestion):
     db_question = Question(
         question = question.question,
-        response = question.response
+        response = question.response,
+        category_id = question.category_id
     )
     
     db.add(db_question)

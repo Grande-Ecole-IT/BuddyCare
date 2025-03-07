@@ -4,7 +4,7 @@ from schemas.profile import CreateProfile
 
 def create_profile(db:Session,profil:CreateProfile):
     db_profile = Profile(
-        date = profil.end_date, 
+        date = profil.date, 
         user_id = profil.user_id
            
     )
