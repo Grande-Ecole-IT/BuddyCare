@@ -1,14 +1,17 @@
 .container {
     margin-top: 25vh;
-    margin-right: 10vw;
     display: flex;
     align-items: center;
     justify-content: center;
+}
 
+.q1-responses {
+    margin-top: 10vh;
+    margin-right: 30vw;
 }
 
 .q1-resp {
-    margin: 20px 20vw 20px 0;
+    margin: 20px 0 20px 0;
     padding: 20px 40px;
     width: 20vw;
     border: #C8B3FF solid 4px;
@@ -18,9 +21,10 @@
 
 .q1-question {
     font-size: 2em;
+    color: white;
 }
 
-.fullscreen-bg {
+.fullscreen-bg-1 {
     background: linear-gradient(to right, white, #8b5cf6);
     background-size: cover;
     background-repeat: no-repeat;
@@ -31,4 +35,55 @@
     top: 0;
     left: 0;
     z-index: -1;
+}
+
+.q2-resp {
+    margin: 20px 0 20px 0;
+    padding: 20px 40px;
+    width: 20vw;
+    border: #C8B3FF solid 4px;
+    border-radius: 20px;
+    font-size: 1.5em;
+}
+
+.q2-question {
+    font-size: 2em;
+    margin-right: 20vw;
+    color: white;
+    margin-bottom: 10vw;
+}
+
+.fullscreen-bg-2 {
+    background: linear-gradient(to right, #8b5cf6, white);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.fullscreen-bg-img {
+    margin-left: 40vw;
+    z-index: -1;
+}
+
+.button-div {
+    width: 150px;
+    position: absolute;
+    margin-top: 25vw;
+}
+
+.left-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.right-cont-text {
+    width: 20vw;
+    font-size: 1.7em;
+    text-align: center;
 }
