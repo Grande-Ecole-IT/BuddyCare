@@ -10,7 +10,9 @@ class User(Base):
     birthday = Column(Date, nullable=False)
     study = Column(String(255), nullable=False)
     sex = Column(String(10), nullable=False)
+    
     messages = relationship("Message", back_populates="user")
+    
     profil = relationship("Profile",back_populates='user')
 
     def giveUser(self):
