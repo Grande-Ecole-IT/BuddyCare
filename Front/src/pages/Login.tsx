@@ -13,8 +13,11 @@ const Login = () => {
     formState: { errors },
     reset,
   } = useForm();
-  
-  const onSubmit = (data) => console.log(data);
+
+  const onSubmit = (data: unknown) => {
+    console.log(data);
+    reset()
+  };
   console.log(errors);
   return (
     <div className="flex w-screen h-screen items-center justify-center bg-gray-100">
