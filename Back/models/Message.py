@@ -12,5 +12,8 @@ class Message(Base):
     user_id = Column(Integer,ForeignKey("User.id"),default=None,nullable=True)
     user = relationship("User",back_populates="messages")
   
+    def giveMessage(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
     
     
