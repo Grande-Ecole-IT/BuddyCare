@@ -28,3 +28,8 @@ class UserUpdate(BaseModel):
     birthday: Optional[date] = None
     study: Optional[str] = None
     sex: Optional[str] = None
+
+
+class UserLogin(BaseModel):
+    username: str
+    password: str

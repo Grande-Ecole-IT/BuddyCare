@@ -13,8 +13,8 @@ userRoute = APIRouter()
 
 
 @userRoute.get("/users")
-def read_users(skip: int = 0, limit: int = 10, db: Session = Depends(database.get_db)):
-    return userCrud.get_users(db, skip, limit)
+def read_users(db: Session = Depends(database.get_db)):
+    return userCrud.get_users(db)
 
 
 @userRoute.get("/users/{user_id}")
