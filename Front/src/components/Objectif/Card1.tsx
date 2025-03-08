@@ -1,13 +1,34 @@
 type CardObjectifProps = {
   title: string;
   image1: string;
-  top: string
-}
+  top: string;
+};
 function CardObjectif({ title, image1, top }: CardObjectifProps) {
   return (
-    <div className="relative h-full w-full" style={{
-      top: top
-    }}>
+    <div
+      className="relative h-full w-full"
+      style={{
+        top: top,
+      }}
+    >
+      {" "}
+      <div className="absolute left-[-40px] top-[-20px] z-50">
+        <svg
+          width="452"
+          height="460"
+          viewBox="0 0 452 460"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M336.339 344.339C399.73 280.948 399.73 178.171 336.339 114.78C272.948 51.3887 170.171 51.3887 106.78 114.78C43.3887 178.171 43.3887 280.948 106.78 344.339C170.171 407.73 272.948 407.73 336.339 344.339ZM120.107 308.797L300.797 128.107C250.29 88.5583 177.05 92.0373 130.544 138.544C84.0373 185.05 80.5583 258.29 120.107 308.797ZM323.731 151.249C362.517 201.721 358.798 274.353 312.575 320.575C266.353 366.798 193.721 370.517 143.249 331.731L323.731 151.249Z"
+            fill="#FA2727"
+            fill-opacity="0.3"
+          />
+        </svg>
+      </div>
       <div
         className="absolute border-2 border-accent h-[400px] w-[340px] bg-secondary"
         style={{
@@ -16,43 +37,32 @@ function CardObjectif({ title, image1, top }: CardObjectifProps) {
         }}
       >
         <div
-          className="relative bg-white h-[400px] w-[340px]"
+          className="relative bg-white h-[400px] w-[340px] top-[-40px]"
           style={{
             borderRadius: "19% 69% 23% 60% / 23% 48% 14% 66%",
             transform: "rotate(-110deg)",
           }}
         >
           <div
-            className="absolute h-[250px] w-[340px] justify-center items-center top-24"
+            className="absolute h-[350px] w-[340px] justify-center items-center top-4 left-5"
             style={{
               borderRadius: "64% 36% 61% 39% / 71% 27% 73% 29%",
-              background: "transparent",
+              background: "white",
               overflow: "hidden",
-              transform: "rotate(110deg)",
+              transform: "rotate(100deg)",
             }}
           >
             <img
               src={image1}
               alt=""
-              className="absolute right-[15%]"
-              style={{ transform: "rotate(0deg)" }}
+              className="absolute"
+              style={{
+                top: "15%",
+                left: "11%",
+                transform: "rotate(10deg) ",
+                scale: "1.3",
+              }}
             />
-          </div>
-          <div className="absolute top-44">
-            <svg
-              width="147"
-              height="147"
-              viewBox="0 0 147 147"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M124.856 124.857C153.365 96.3483 153.365 50.1273 124.856 21.619C96.3481 -6.88927 50.1271 -6.88927 21.6188 21.619C-6.88948 50.1273 -6.88948 96.3483 21.6188 124.857C50.1271 153.365 96.3481 153.365 124.856 124.857ZM27.6123 108.872L108.872 27.6125C86.1585 9.82669 53.2208 11.3912 32.3059 32.3061C11.391 53.221 9.82648 86.1587 27.6123 108.872ZM119.186 38.02C136.629 60.7182 134.957 93.3821 114.169 114.169C93.3819 134.957 60.718 136.629 38.0198 119.186L119.186 38.02Z"
-                fill="#FA2727"
-              />
-            </svg>
           </div>
         </div>
       </div>
