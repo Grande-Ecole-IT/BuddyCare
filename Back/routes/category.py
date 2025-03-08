@@ -14,5 +14,6 @@ async def create_Category(cat: CreateCategory, db: Session = Depends(get_db)):
     return create_category(db,cat)
 
 @CategoryRouter.get("/Category/{id}",response_model=category.Category)
-def read_user(id:int,db:Session=Depends(get_db)):
-    return db.query(Category).filter(Category.id==id).first()
+def read_category(id:int,db:Session=Depends(get_db)):
+    category = db.query(Category).filter(Category.id==id).first()
+    return category.giveCategory()
