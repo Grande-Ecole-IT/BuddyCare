@@ -1,6 +1,6 @@
 from datetime import datetime
 from sqlalchemy.orm import Session
-from config.database import SessionLocal
+from config.database import sessionLocal
 from models.Message import Message
 import google.generativeai as genai
 from models.User import User

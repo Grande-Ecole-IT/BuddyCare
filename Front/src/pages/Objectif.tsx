@@ -21,7 +21,7 @@ function Objectif() {
             est là pour vous, dites adieu à la détresse
           </h1>
         </div>
-        <div className="grid grid-flow-col gap-10 ml-14 mt-11">
+        <div className="relative top-[-30px] grid grid-flow-col gap-10 ml-14 mt-11">
           <CardObjectif1 title="Désorganiser" image1={image1} top="160px" />
           <CardObjectif1 title="Pas assez de temps" image1={lock} top="" />
           <CardObjectif1
