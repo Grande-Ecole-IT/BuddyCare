@@ -9,8 +9,11 @@ import Header from "@/components/Common/Header";
 function AboutPage() {
   return (
     <div className="flex flex-col w-full h-full items-center bg-white">
-      <Header userName="Jason" />
-      <div className="grid grid-cols-[2fr_1.75fr] w-[80%] h-[600px] mt-24">
+      <Header bouttonRole="Parles-moi de to?" />
+      <div
+        id="accueil"
+        className="grid grid-cols-[2fr_1.75fr] w-[80%] h-[600px] mt-24"
+      >
         <div>
           <div className="w-[80%] mt-[30%]">
             <h1 className="text-[50px] font-semibold font-poppins">
@@ -33,7 +36,10 @@ function AboutPage() {
           <NewShape />
         </div>
       </div>
-      <div className="flex justify-center items-center flex-col mt-32">
+      <div
+        id="about"
+        className="flex justify-center items-center flex-col mt-32"
+      >
         <h1 className="font-poppins font-semibold text-[64px]">
           Pourquoi{" "}
           <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -247,11 +253,11 @@ function AboutPage() {
       </div>
       <div className="flex justify-start flex-col mt-32 w-[60%]">
         <h1 className="font-poppins font-semibold text-[50px] w-[70%]">
-          Voyons les disponible{" "}
+          Voyons les{" "}
           <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             outils{" "}
           </span>
-          pour vous
+          disponible pour vous
         </h1>
         <div>
           <div className="flex flex-row mb-5">
