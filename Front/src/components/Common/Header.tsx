@@ -1,13 +1,16 @@
+import { useNavigate } from "react-router-dom";
+
 type HeaderProps = {
-  bouttonRole: string;
+  bouttonRole: string,
+  style: string
 };
 
-export default function Header({ bouttonRole }: HeaderProps) {
+export default function Header({ bouttonRole, style }: HeaderProps) {
   const initials = bouttonRole
     .split(" ")
     .map((name) => name[0])
     .join("");
-
+  const navigate = useNavigate();
   return (
     <div
       className="flex justify-center fixed w-full shadow-xl z-10"
@@ -91,12 +94,18 @@ export default function Header({ bouttonRole }: HeaderProps) {
                 .getElementById("accueil")
                 ?.scrollIntoView({ behavior: "smooth" });
             }}
+            style={{
+              display: style
+            }}
           >
             Accueil
             <div className="absolute bottom-4 left-0 bg-black h-[2px] transition-all duration-300 w-0 group-hover:w-[65%] ml-4"></div>
           </a>
           <a
             href="#about"
+            style={{
+              display: style
+            }}
             className="text-lg font-poppins font-medium text-black p-4 relative group"
             onClick={(e) => {
               e.preventDefault();
@@ -108,7 +117,9 @@ export default function Header({ bouttonRole }: HeaderProps) {
             À Propos
             <div className="absolute bottom-4 left-0 bg-black h-[2px] transition-all duration-300 w-0 group-hover:w-[70%] ml-4"></div>
           </a>
-          <a
+            onClick={() => {
+              navigate("/question1");
+            }}
             href="#talk"
             className="text-lg font-poppins font-medium text-primary border-2 border-[#8738F5] p-4"
           >

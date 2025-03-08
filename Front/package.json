@@ -17,6 +17,8 @@
     "@fontsource/roboto-flex": "^5.2.5",
     "@mui/icons-material": "^6.4.7",
     "@mui/material": "^6.4.7",
+    "@react-spring/web": "^9.7.5",
+    "dotenv": "^16.4.7",
     "framer-motion": "^12.4.10",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

@@ -1,9 +1,10 @@
 import { Button } from "@mui/material";
 
 type bouttonProps = {
-  nameOfButton: string
+  nameOfButton: string;
+  onSubmit: () => void
 }
-function CustomizeButton({ nameOfButton }: bouttonProps) {
+function CustomizeButton({ nameOfButton, onSubmit }: bouttonProps) {
   return (
     <div
       className="relative pb-[5px] rounded-[14.36px] mt-3"
@@ -25,6 +26,7 @@ function CustomizeButton({ nameOfButton }: bouttonProps) {
           padding: "10px 16px",
           boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.2)",
         }}
+        onClick={onSubmit}
       >
         {nameOfButton}
       </Button>
