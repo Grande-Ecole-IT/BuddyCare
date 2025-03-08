@@ -1,13 +1,25 @@
 import Noty from "@/components/Common/Noty";
 import Sidebar from "@/components/Common/SideBar";
-import robot from "../assets/robot.png"
-import buttonImage from "../assets/customizedButtom.png"
-import { useNavigate } from "react-router-dom";
+import { getUser } from "@/store/reducers/auth";
+import { AppDispatch } from "@/store/store";
+import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import buttonImage from "../assets/customizedButtom.png";
+import robot from "../assets/robot.png";
 
 const days = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
 
 export default function Dashboard() {
+  const location = useLocation();
+  const idUser = location.state || {}; // Récupère idUser depuis l'objet stat
+  const id_user = idUser.id_user;
   const navigate = useNavigate();
+
+  const dispatch = useDispatch<AppDispatch>();
+  const response = dispatch(getUser(id_user));
+
+  console.log(response.data)
+
   return (
     <div className="flex flex-col w-full h-full bg-white">
       {/* Sidebar */}
@@ -22,7 +34,7 @@ export default function Dashboard() {
           <div className="flex items-center space-x-6">
             <Noty width="45px" color="#122C34" count={10} />
             <div className="rounded-full w-[60px] h-[60px] bg-[#00FF73]"></div>
-            <h1 className="text-black text-[25px] font-poppins">Pseudo</h1>
+            <h1 className="text-black text-[25px] font-poppins">Sarobidy</h1>
           </div>
         </div>
 
@@ -60,7 +72,7 @@ export default function Dashboard() {
       </div>
       <button
         className="flex justify-end mr-[2%]"
-        onClick={() => navigate("/chatBotIa")}
+        onClick={() => navigate("/chatBotIa", { state: { id_user: id_user } })}
       >
         <img src={buttonImage} alt="" width="100px" height="100px" />
       </button>

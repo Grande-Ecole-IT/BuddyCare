@@ -11,10 +11,10 @@ type HeaderProps = {
 
 const menuItems = [
   { name: "Dashboard", icon: <IconDash />, path: "/dashboard" },
-  { name: "FlowSync", icon: <FlowSyncIcon />, path: "/flowsync" },
+  // { name: "FlowSync", icon: <FlowSyncIcon />, path: "/flowsync" },
   { name: "SoulScrypt", icon: <SoulScryptIcon />, path: "/soulscrypt" },
   { name: "MoodTrackr", icon: <MoodTrackrIcon />, path: "/moodtrackr" },
-  { name: "SynergyHub", icon: <SynergyHubIcon />, path: "/synergyhub" },
+  // { name: "SynergyHub", icon: <SynergyHubIcon />, path: "/synergyhub" },
 ];
 
 export default function Sidebar({ userName }: HeaderProps) {
@@ -26,7 +26,7 @@ export default function Sidebar({ userName }: HeaderProps) {
       style={{ backgroundColor: "white" }}
     >
       <div className="flex flex-row h-[10%] w-full justify-center items-center cursor-pointer" onClick={() => {
-        navigate("/homePage")
+        navigate("/")
       }}>
         <h1 className="font-semibold text-[30px] bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
           BuddyCare +
