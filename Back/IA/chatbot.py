@@ -3,50 +3,44 @@ from sqlalchemy.orm import Session
 from config.database import SessionLocal
 from models.Message import Message
 import google.generativeai as genai
+from models.User import User
 
-def get_gemini_text_messages(input_prompt, user_id=None):
-    db = SessionLocal()
+def get_gemini_text_messages(db: Session, user_id: int, input_prompt: str):
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        return "Utilisateur non trouvé."
+
+    # Récupérer l'historique des messages de l'utilisateur
+    history = "\n".join([msg.history for msg in user.messages]) if user.messages else ""
+
+    prompt = f"""
+    Tu es un expert en psychologie amical et empathique qui est à l'écoute des besoins des patients.
+    Si l'utilisateur présente des signes de dépression grave pouvant mener au suicide, réponds :
+    "Je suis désolé, ce qui se passe est au-dessus de mes compétences. Je vous conseille d'appeler un proche et de ne pas rester seul(e)."
+    
+    Historique de conversation :
+    {history}
+
+    Utilisateur : {input_prompt}
+    
+    Réponds d'une façon concise et précise.
+    """
 
     try:
         model = genai.GenerativeModel("gemini-2.0-flash")
-        history = ""
-
-        if user_id:
-            messages = db.query(Message).filter(Message.user_id == user_id).order_by(Message.begin_date).all()
-            for message in messages:
-                # Utiliser l'historique tel quel, car il contient déjà les deux parties
-                history += f"{message.history}\n"
-
-        prompt = f"""
-        Tu es un expert en psychologie amical et empathique qui est à l'écoute des besoins de ses patients .
-        TU es là pour aider et accompagner les gens dans leurs difficultés émotionnelles.
-        Si l'utilisateur présente des signes de dépression grave pouvant emmener aux suicide: réponds : 
-        "Je suis désolé, ce qui se passe est en dessus de mes compétences. Je suis là que pour vous assister.Je vous conseille d'appeler un proche et de ne pas réster seul(e)."
-        {history}
-        {input_prompt}
-        Réponds d'une façon concise et précise.
-        Le dialogue doit être en français.
-        """
         result = model.generate_content(prompt)
-        response_text = result.text
+        chatbot_response = result.text if result else "Je n'ai pas compris."
 
-        # Combiner le prompt et la réponse pour l'historique
-        combined_message = f"Utilisateur: {input_prompt}\nIA: {response_text}"
-
-        message = Message(
-            history=combined_message,
-            begin_date=datetime.now(),
-            end_date=datetime.now(),
+        # Sauvegarde du message dans MariaDB
+        new_message = Message(
+            history=f"Utilisateur: {input_prompt}\nChatbot: {chatbot_response}",
+            begin_date=datetime,
             user_id=user_id
         )
-        db.add(message)
+        db.add(new_message)
         db.commit()
 
-        return response_text
-
+        return chatbot_response
     except Exception as e:
-        print(f"Une erreur s'est produite: {e}")
-        return "Une erreur s'est produite. Veuillez réessayer."
-
-    finally:
-        db.close()
+        print(f"Erreur Gemini : {e}")
+        return "Une erreur est survenue."

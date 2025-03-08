@@ -1,6 +1,6 @@
 from fastapi import FastAPI,WebSocket,Depends,HTTPException
 from sqlalchemy.orm import Session
-from config.database import init_db
+from config.database import init_db,get_db
 from routes.messages import messageRouter
 from contextlib import asynccontextmanager
 from routes.question import QuestionRouter
@@ -9,6 +9,7 @@ from routes.profile import profilRouter
 from routes.user import userRoute
 from Back.IA.chatbot import get_gemini_text_messages
 from Back.IA.suggestion import get_gemini_text_suggestion
+from models.User import User
 
 
 @asynccontextmanager
@@ -30,6 +31,15 @@ app.include_router(profilRouter, tags=["Profil routeur"])
 @app.websocket("/ws/{user_id}")
 async def websocket_endpoint(websocket: WebSocket, user_id: int, db: Session = Depends(get_db)):
     await websocket.accept()
+    
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        await websocket.send_text("Utilisateur non trouvé.")
+        await websocket.close()
+        return
+    
+    await websocket.send_text(f"Bienvenue, {user.name}! De quoi allons nous parler aujourd'hui?")
+    
     try:
         while True:
             data = await websocket.receive_text()
@@ -50,4 +60,9 @@ async def generate_suggestion():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
+
+@app.get("/suggestions/{user_id}")
+async def get_suggestions(user_id: int, db: Session = Depends(get_db)):
+    suggestions = get_gemini_text_suggestion(user_id, db)
+    return {"suggestions": suggestions}
 
