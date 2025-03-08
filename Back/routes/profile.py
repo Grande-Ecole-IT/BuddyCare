@@ -4,6 +4,7 @@ from fastapi import Depends
 from config.database import get_db
 from utils.createProfile import create_profile
 from schemas.profile import CreateProfile
+from schemas import profile
 from models.Profile import Profile
 
 profilRouter = APIRouter()
@@ -12,6 +13,6 @@ profilRouter = APIRouter()
 async def create_Profil(profil: CreateProfile, db: Session = Depends(get_db)):
     return create_profile(db,profil)
 
-@profilRouter.get("/profil/{id}",response_model=CreateProfile)
+@profilRouter.get("/profil/{id}",response_model=profile.Profile)
 def read_user(id:int,db:Session=Depends(get_db)):
     return db.query(Profile).filter(Profile.id==id).first()
