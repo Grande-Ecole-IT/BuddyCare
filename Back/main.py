@@ -7,8 +7,8 @@ from routes.question import QuestionRouter
 from routes.category import CategoryRouter
 from routes.profile import profilRouter
 from routes.user import userRoute
-from Back.IA.chatbot import get_gemini_text_messages
-from Back.IA.suggestion import get_gemini_text_suggestion
+from IA.chatbot import get_gemini_text_messages
+from IA.suggestion import get_gemini_text_suggestion
 from models.User import User
 
 
