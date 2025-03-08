@@ -38,12 +38,14 @@ async def websocket_endpoint(websocket: WebSocket, user_id: int, db: Session = D
         await websocket.close()
         return
     
-    await websocket.send_text(f"Bienvenue, {user.name}! De quoi allons nous parler aujourd'hui?")
+    await websocket.send_text(f"Bienvenue, {user.username}! De quoi allons nous parler aujourd'hui?")
     
     try:
         while True:
             data = await websocket.receive_text()
-            response = get_gemini_text_messages(data, user_id)
+            print(data)
+            response = get_gemini_text_messages(db, user_id, data)
+            print(response)
             await websocket.send_text(response)
     except Exception as e:
         print(f"WebSocket error: {e}")

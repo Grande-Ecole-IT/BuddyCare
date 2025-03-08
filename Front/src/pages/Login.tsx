@@ -4,11 +4,26 @@ import DiamondShape from "@/components/Login/Shape/Diamond";
 import EllipsShape from "@/components/Login/Shape/Ellipse";
 import PolygonShape from "@/components/Login/Shape/Polygon1";
 import TriangleShape from "@/components/Login/Shape/Triangle";
+import { loginUser } from "@/store/reducers/auth";
+import { RootState } from "@/store/store";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [idUser, setIdUser] = useState<number>(0);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { status, error, user } = useSelector((state: RootState) => state.auth);
+  useEffect(() => {
+    if (status === "succeeded" && user) {
+      console.log("Connexion réussie:", user);
+      navigate("/dashboard");
+    }
+  }, [status, user, navigate]);
+  // Local state for the form
   const {
     register,
     handleSubmit,
@@ -16,11 +31,31 @@ const Login = () => {
     reset,
   } = useForm();
 
-  const onSubmit = (data: unknown) => {
-    console.log(data);
-    reset()
+  const onSubmit = async (data: { username: string; password: string }) => {
+    try {
+      // Dispatch de l'action et attente de sa résolution
+      const actionResult = await dispatch(loginUser(data));
+      // Vérification si l'action a réussi
+      const id_user = actionResult.payload.id_user;
+      if (loginUser.fulfilled.match(actionResult)) {
+        // L'action a réussi, vous pouvez accéder aux données ici
+        // Redirection vers la page d'accueil
+        navigate("/dashboard", { state: { id_user: id_user } });
+        // Réinitialisation du formulaire
+        reset();
+      } else {
+        // L'action a échoué, gestion de l'erreur
+        console.error(
+          "Erreur lors de la connexion:",
+          actionResult.error.message
+        );
+      }
+    } catch (error) {
+      // Gestion des erreurs inattendues
+      console.error("Erreur lors de la soumission du formulaire:", error);
+    }
   };
-  console.log(errors);
+
   return (
     <div className="flex w-screen h-screen items-center justify-center bg-gray-100">
       <div className="fixed w-[60rem] h-[60rem] z-10 top-[-50%] right-[-20%]">
@@ -65,27 +100,25 @@ const Login = () => {
               <CustomizeTextField
                 register={register}
                 errors={errors}
-                name="Nom"
+                name="username"
                 placeholder="Nom"
                 isMdp={false}
               />
               <CustomizeTextField
                 register={register}
                 errors={errors}
-                name="Prénom"
-                placeholder="Prénoms"
-                isMdp={false}
-              />
-              <CustomizeTextField
-                register={register}
-                errors={errors}
-                name="Mot de passe"
+                name="password"
                 placeholder="Mot de passe"
                 isMdp={true}
               />
-              <CustomizeButton nameOfButton="Soumettre" onSubmit={() => {}}/>
+              <CustomizeButton nameOfButton="Login" onSubmit={() => {}} />
             </form>
-            <h2 className="text-[17px] pb-6 cursor-pointer" onClick={() => {navigate("/signin")}}>
+            <h2
+              className="text-[17px] pb-6 cursor-pointer"
+              onClick={() => {
+                navigate("/signin");
+              }}
+            >
               Besoin d'un compte ?{" "}
               <span className="text-[#4112FD]">créer un compte</span>
             </h2>

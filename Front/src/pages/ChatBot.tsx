@@ -1,19 +1,80 @@
 import Noty from "@/components/Common/Noty";
 import Sidebar from "@/components/Common/SideBar";
-import { TextField } from "@mui/material";
-import { useForm } from "react-hook-form";
+import SendIcon from "@mui/icons-material/Send";
+import { IconButton, TextField } from "@mui/material";
+import { useEffect, useState, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import robot2 from "../assets/robot2.png";
-import SendIcon from '@mui/icons-material/Send';
 
 const days = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
 
 export default function ChatBotIA() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const location = useLocation();
+  const { id_user } = location.state || {}; // Récupère id_user depuis l'objet state
+  const [messages, setMessages] = useState([]);
+  const [inputMess, setInputMess] = useState("");
+  const socket = useRef(null);
+
+  useEffect(() => {
+    if (!id_user) return;
+
+    // Adaptez l'URL en fonction de votre domaine et port
+    const ws = new WebSocket(`ws://localhost:8000/ws/${id_user}`);
+    socket.current = ws;
+
+    ws.onopen = () => {
+      console.log("Connexion WebSocket établie");
+    };
+
+    ws.onmessage = (event) => {
+      const newMessage = {
+        text: event.data,
+        sender: "received",
+        time: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      };
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
+    };
+
+    ws.onerror = (error) => {
+      console.error("Erreur WebSocket :", error);
+    };
+
+    ws.onclose = () => {
+      console.log("Connexion WebSocket fermée");
+    };
+
+    // Nettoyage lors du démontage
+    return () => {
+      ws.close();
+    };
+  }, [id_user]);
+
+  // Fonction pour gérer l'envoi du message
+  const handleSendMessage = () => {
+    if (inputMess.trim() === "") return; // Ne pas envoyer de message vide
+
+    const newMessage = {
+      text: inputMess,
+      sender: "sent",
+      time: new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+    };
+
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+
+    if (socket.current && socket.current.readyState === WebSocket.OPEN) {
+      socket.current.send(inputMess);
+    } else {
+      console.error("La connexion WebSocket n'est pas ouverte.");
+    }
+
+    setInputMess(""); // Réinitialiser l'input
+  };
 
   return (
     <div className="flex flex-col w-full h-full bg-white">
@@ -78,7 +139,17 @@ export default function ChatBotIA() {
           height="204.17px"
           className="absolute top-64 left-[25%]"
         />
-        <h2 className="text-[25px]">De quoi veux-tu discuter ?</h2>
+        <div className="absolute w-[800px] h-[500px] overflow-y-auto overflow-x-hidden">
+          {messages.map((msg, index) => (
+            <div
+              key={index}
+              className={`message ${msg.sender} w-[235px] h-auto shadow-2xl`}
+            >
+              <p>{msg.text}</p>
+              <span className="time">{msg.time}</span>
+            </div>
+          ))}
+        </div>
         <div
           className="relative p-[4px] rounded-[16.36px] mt-3 top-[40%]"
           style={{
@@ -89,19 +160,15 @@ export default function ChatBotIA() {
           <TextField
             id="outlined-basic"
             fullWidth
+            value={inputMess}
+            onChange={(e) => setInputMess(e.target.value)}
             placeholder="Écrire"
             variant="outlined"
-            {...register("message", {
-              required: `Message est réquis.`,
-            })}
-            error={Boolean(errors.message)}
             InputProps={{
               endAdornment: (
-                  <SendIcon
-                    onClick={() => {}}
-                    className="text-primary"
-                  >
-                  </SendIcon>
+                <IconButton onClick={handleSendMessage}>
+                  <SendIcon className="text-primary" />
+                </IconButton>
               ),
             }}
             sx={{
@@ -109,7 +176,7 @@ export default function ChatBotIA() {
                 borderRadius: "12.36px",
                 backgroundColor: "white",
                 "& fieldset": {
-                  borderColor: "transparent", // On masque la bordure par défaut
+                  borderColor: "transparent",
                   borderWidth: "2.47px",
                 },
                 "&:hover fieldset": {
@@ -118,7 +185,7 @@ export default function ChatBotIA() {
                 "&.Mui-focused fieldset": {
                   borderColor: "transparent",
                 },
-                boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.2)", // Ombre
+                boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.2)",
               },
             }}
           />

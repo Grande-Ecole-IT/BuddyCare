@@ -117,6 +117,7 @@ export default function Header({ bouttonRole, style }: HeaderProps) {
             À Propos
             <div className="absolute bottom-4 left-0 bg-black h-[2px] transition-all duration-300 w-0 group-hover:w-[70%] ml-4"></div>
           </a>
+          <a
             onClick={() => {
               navigate("/question1");
             }}

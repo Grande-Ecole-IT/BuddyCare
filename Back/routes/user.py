@@ -54,4 +54,4 @@ def login(user: userSchema.UserLogin, db: Session = Depends(database.get_db)):
         data={"sub": user_auth.username}, expires_delta=timedelta(minutes=60)
     )
 
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"access_token": access_token, "token_type": "bearer", "id_user": user_auth.id}

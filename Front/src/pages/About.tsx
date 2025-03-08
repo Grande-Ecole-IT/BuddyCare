@@ -43,7 +43,7 @@ function AboutPage() {
         <h1 className="font-poppins font-semibold text-[64px]">
           Pourquoi{" "}
           <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            StudyBuddy
+            BuddyCare+
           </span>
           ?
         </h1>

@@ -1,4 +1,5 @@
 import CustomizeButton from "@/components/Common/Boutton";
+import Header from "@/components/Common/Header";
 import { useNavigate } from "react-router-dom";
 
 const Question2 = () => {
@@ -10,6 +11,7 @@ const Question2 = () => {
 
     return (
       <div className="relative border-2 border-red-600 z-0">
+        <Header bouttonRole="Parles-moi de toi ?" style="" />
         <div className="fullscreen-bg-2"></div>
         <div className="absolute fullscreen-bg-img">
           <svg
@@ -57,7 +59,7 @@ const Question2 = () => {
             </defs>
           </svg>
         </div>
-        <div className="container flex justify-center items-center ml-36 mt-12">
+        <div className="container flex justify-center items-center ml-36 mt-72">
           <div className="left-container">
             <div className="q2-question">
               FAIS-TOI CONNAÎTRE, ON NE MORD PAS... ENFIN PRESQUE ! 😂

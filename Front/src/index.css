@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.message {
+  max-width: 35%;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+  position: relative;
+  font-size: 18px;
+}
+.received {
+  background-color: #f1f1f1;
+  align-self: flex-start;
+}
+.sent {
+  background-color: #8738F5;
+  color: white;
+  margin-left: 70%;
+  align-self: flex-end;
+}
+.time {
+  font-size: 0.8em;
+  color: #666;
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+}

@@ -5,21 +5,54 @@ import DiamondShape from "@/components/Login/Shape/Diamond";
 import EllipsShape from "@/components/Login/Shape/Ellipse";
 import PolygonShape from "@/components/Login/Shape/Polygon1";
 import TriangleShape from "@/components/Login/Shape/Triangle";
+import { signinUser } from "@/store/reducers/auth";
+import { AppDispatch, RootState } from "@/store/store";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+type SignInFormData = {
+  username: string;
+  password: string;
+  birthday: Date;
+  study: string;
+  sex: string
+};
+
+const transformData = (data: any) => {
+  return {
+    username: data.Pseudo, // "Pseudo" → "username"
+    password: data.MotDePasse, // "MotDePasse" → "password"
+    birthday: new Date(data.dateNaissance), // "dateNaissance" (string) → Date
+    study: data.Filière, // "Filière" → "study"
+    sex: data.Genre, // "Genre" → "sex"
+  };
+};
 
 const SignIn = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+   const dispatch = useDispatch<AppDispatch>();
+   const {
+     register,
+     handleSubmit,
+     formState: { errors },
+     reset,
+   } = useForm<SignInFormData>();
 
-  const onSubmit = (data: unknown) => {
-    console.log(data);
-    reset();
-  };
-  console.log(errors);
+   const { status, error } = useSelector((state: RootState) => state.auth);
+   const navigate = useNavigate(); 
+
+   const onSubmit = async (data: SignInFormData) => {
+      const formattedData = transformData(data);
+     try {
+       const result = await dispatch(signinUser(formattedData)).unwrap(); // Déclenche signinUser
+       console.log("Inscription réussie :", result);
+       reset(); // Réinitialiser le formulaire après succès
+        navigate("/login")
+     } catch (err) {
+       console.error("Erreur lors de l'inscription :", err);
+     }
+   };
+    
   return (
     <div className="flex w-screen h-screen items-center justify-center bg-gray-100">
       <div className="fixed w-[60rem] h-[60rem] z-10 top-[-50%] right-[-20%]">
@@ -125,6 +158,7 @@ const SignIn = () => {
 
               {/* Bouton de soumission */}
               <CustomizeButton nameOfButton="Confirmer" onSubmit={() => {}} />
+              {error && <p className="text-red-500">{error}</p>}
             </form>
           </div>
         </div>

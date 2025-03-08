@@ -4,6 +4,10 @@ from config.database import sessionLocal
 from models.Message import Message
 import google.generativeai as genai
 from models.User import User
+from dotenv import load_dotenv
+
+load_dotenv()
+genai.configure(api_key="AIzaSyD8vv48m0H1cZ4L789D0KTAi-YaskaA8p8")
 
 def get_gemini_text_messages(db: Session, user_id: int, input_prompt: str):
     user = db.query(User).filter(User.id == user_id).first()
@@ -34,7 +38,8 @@ def get_gemini_text_messages(db: Session, user_id: int, input_prompt: str):
         # Sauvegarde du message dans MariaDB
         new_message = Message(
             history=f"Utilisateur: {input_prompt}\nChatbot: {chatbot_response}",
-            begin_date=datetime,
+            begin_date=datetime.now(),
+            end_date=datetime.now(),
             user_id=user_id
         )
         db.add(new_message)
