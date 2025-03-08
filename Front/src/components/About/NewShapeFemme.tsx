@@ -6,7 +6,7 @@ function NewShape() {
     <motion.img
       src={femmeImg}
       alt=""
-      className="absolute top-12 left-56"
+      className="absolute left-[25%]"
       animate={{ y: [0, -20, 0] }}
       transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
     />

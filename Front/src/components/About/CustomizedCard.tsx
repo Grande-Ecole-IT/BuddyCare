@@ -35,8 +35,8 @@ function CustomizedCard({ title, description, icon }: CardProps) {
           background: "transparent",
         }}
       >
-        <div className="absolute rounded-full h-[75px] w-[75px] bg-secondaryTransparent 	backdrop-blur-sm">
-         {icon}
+        <div className="absolute left-10 top-10 rounded-full h-[75px] w-[75px] bg-secondaryTransparent 	backdrop-blur-sm">
+          {icon}
         </div>
         <div className="absolute top-32 left-[-10px]">
           <h1 className="flex w-full justify-start ml-20 mb-[-10px] font-poppins text-[20px] font-bold">

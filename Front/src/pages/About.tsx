@@ -8,7 +8,7 @@ import Header from "@/components/Common/Header";
 
 function AboutPage() {
   return (
-    <div className="flex flex-col w-full h-full items-center bg-white">
+    <div className="flex flex-col w-full h-full items-center overflow-hidden">
       <Header bouttonRole="Parles-moi de to?" />
       <div
         id="accueil"
@@ -31,7 +31,7 @@ function AboutPage() {
             </div>
           </div>
         </div>
-        <div className="relative w-full">
+        <div className="relative w-[100%]">
           <Blobe />
           <NewShape />
         </div>
