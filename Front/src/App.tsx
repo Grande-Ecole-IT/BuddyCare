@@ -3,6 +3,8 @@ import './App.css'
 import Login from './pages/Login';
 import AboutPage from './pages/About';
 import Objectif from "./pages/Objectif";
+import Dashboard from "./pages/Dashboard";
+import ChatBotIA from "./pages/ChatBot";
 import "@fontsource/island-moments";
 import "@fontsource/roboto-flex";
 import '@fontsource/poppins';
@@ -13,11 +15,13 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/homePage" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<AboutPage />} />
         <Route path="/objectif" element={<Objectif />} />
         <Route path="/question1" element={<Question1 />} />
         <Route path="/question2" element={<Question2 />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/chatBotIa" element={<ChatBotIA />} />
       </Routes>
     </Router>
   );

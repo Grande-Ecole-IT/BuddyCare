@@ -8,7 +8,7 @@ import image2 from "../assets/bringThings.png"
 function Objectif() {
   return (
     <div className="flex flex-col w-full h-full items-center bg-white">
-      <Header userName="Jason" />
+      <Header bouttonRole="Revenir au quizz ?" />
       <div className="flex flex-col w-full mt-40 mb-24">
         <div className="flex w-full justify-center items-center">
           <h1 className="font-poppins font-semibold text-[64px] w-[70%]">
