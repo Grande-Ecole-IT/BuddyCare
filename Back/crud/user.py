@@ -11,7 +11,7 @@ def get_user(db: Session, user_id: int):
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="Utilisateur non trouvé")
-    return user
+    return user.giveUser()
 
 
 def get_users(db: Session):

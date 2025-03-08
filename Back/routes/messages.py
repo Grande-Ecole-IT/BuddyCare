@@ -16,4 +16,4 @@ async def create_Message(message: CreateMessage, db: Session = Depends(get_db)):
 @messageRouter.get("/message/{id}",response_model=message.Message)
 def read_user(id:int,db:Session=Depends(get_db)):
     message = db.query(Message).filter(Message.id==id).first()
-    return message
+    return message.giveMessage()

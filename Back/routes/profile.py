@@ -14,5 +14,6 @@ async def create_Profil(profil: CreateProfile, db: Session = Depends(get_db)):
     return create_profile(db,profil)
 
 @profilRouter.get("/profil/{id}",response_model=profile.Profile)
-def read_user(id:int,db:Session=Depends(get_db)):
-    return db.query(Profile).filter(Profile.id==id).first()
+def read_profile(id:int,db:Session=Depends(get_db)):
+    profile = db.query(Profile).filter(Profile.id==id).first()
+    return profile.giveProfile()

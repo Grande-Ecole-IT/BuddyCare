@@ -16,5 +16,5 @@ async def create_Question(QUestion: CreateQuestion, db: Session = Depends(get_db
 @QuestionRouter.get("/Question/{id_question}",response_model=question.Question)
 def read_question(id_question : int,db:Session=Depends(get_db)):
     question = db.query(Question).filter(Question.id==id_question).first()
-    return question
+    return question.giveQuestion()
 
