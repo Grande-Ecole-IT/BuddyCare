@@ -9,7 +9,7 @@ import Header from "@/components/Common/Header";
 function AboutPage() {
   return (
     <div className="flex flex-col w-full h-full items-center bg-white">
-      <Header bouttonRole="Parles-moi de to?" />
+      <Header bouttonRole="Parles-moi de toi ?" style=""/>
       <div
         id="accueil"
         className="grid grid-cols-[2fr_1.75fr] w-[80%] h-[600px] mt-24"

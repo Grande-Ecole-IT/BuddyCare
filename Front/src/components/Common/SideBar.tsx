@@ -22,7 +22,7 @@ export default function Sidebar({ userName }: HeaderProps) {
 
   return (
     <div
-      className="flex flex-col fixed w-[20%] h-full shadow-xl z-10"
+      className="flex flex-col fixed w-[20%] h-full shadow-2xl z-10"
       style={{ backgroundColor: "white" }}
     >
       <div className="flex flex-row h-[10%] w-full justify-center items-center cursor-pointer" onClick={() => {
